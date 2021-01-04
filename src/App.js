@@ -36,7 +36,7 @@ function App() {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/cart">
-            <Cart />
+            <Cart cart={cart} />
           </Route>
           <Route path="/">
             <Home 
@@ -76,8 +76,18 @@ function Home({ products, cart, setCart }) {
     
 }
 
-function Cart() {
-  return <h2>Cart</h2>;
+function Cart({ cart }) {
+
+  function renderCart(){
+    return cart.map(product => <li>{product.title}</li>)
+  }
+
+  return (
+    <div>
+      <h2>Cart</h2>;
+      {renderCart()}
+    </div>
+  )
 }
 
 export default App
