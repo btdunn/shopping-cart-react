@@ -1,3 +1,4 @@
+import { render } from "@testing-library/react";
 import React, {useState, useEffect} from "react";
 import {
   BrowserRouter as Router,
@@ -38,7 +39,7 @@ function App() {
             <Cart />
           </Route>
           <Route path="/">
-            <Home />
+            <Home products={products} />
           </Route>
         </Switch>
       </div>
@@ -46,8 +47,19 @@ function App() {
   );
 }
 
-function Home() {
-  return <h2>Home</h2>;
+function Home({ products }) {
+
+  function renderProducts(){
+    return products.map(product => <img src={product.thumb} />)
+  }
+
+  return (
+    <div>
+      <h2>Home</h2>
+      {renderProducts()}
+    </div>
+  )
+    
 }
 
 function Cart() {
