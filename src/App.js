@@ -39,7 +39,11 @@ function App() {
             <Cart />
           </Route>
           <Route path="/">
-            <Home products={products} />
+            <Home 
+              products={products} 
+              cart={cart}
+              setCart={setCart}
+            />
           </Route>
         </Switch>
       </div>
@@ -47,10 +51,20 @@ function App() {
   );
 }
 
-function Home({ products }) {
+function Home({ products, cart, setCart }) {
+
+  function handleClick(product){
+    return setCart([...cart, product])
+  }
 
   function renderProducts(){
-    return products.map(product => <img src={product.thumb} />)
+    return products.map(product => {
+      return (
+        <button onClick={() => handleClick(product)}>
+          <img src={product.thumb} />
+        </button>
+      )
+    })
   }
 
   return (
